@@ -1,5 +1,4 @@
 import { useSelector } from '../../services/store';
-import 
 import styles from './constructor-page.module.css';
 
 import { BurgerIngredients } from '../../components';
