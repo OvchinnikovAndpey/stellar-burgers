@@ -18,9 +18,9 @@ export const BurgerIngredients: FC = () => {
   );
   const sauces = ingredients.filter(
     (ingredient: TIngredient) => ingredient.type === 'sauce'
-  )
-  console.log(buns);
-  
+  );
+  // console.log(buns);
+
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);
   const titleMainRef = useRef<HTMLHeadingElement>(null);
