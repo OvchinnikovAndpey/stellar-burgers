@@ -15,7 +15,7 @@ const basename =
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename={basename} >
+      <BrowserRouter basename={basename}>
         <App />
       </BrowserRouter>
     </Provider>
