@@ -1,5 +1,5 @@
 import { FC } from 'react';
-
+import { UseSelector } from 'react-redux';
 import { TOrder } from '@utils-types';
 import { FeedInfoUI } from '../ui/feed-info';
 
