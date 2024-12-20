@@ -8,8 +8,9 @@ import { TIngredient } from '@utils-types'; // Импортируйте тип T
 export const IngredientDetails: FC = () => {
   const { id } = useParams();
 
-  const ingredientData = useSelector((state: { ingredients: { data: TIngredient[] } }) =>
-    state.ingredients.data?.find((item: TIngredient) => item._id === id)
+  const ingredientData = useSelector(
+    (state: { ingredients: { data: TIngredient[] } }) =>
+      state.ingredients.data?.find((item: TIngredient) => item._id === id)
   );
   // Почему не открывается модальное окно
 
