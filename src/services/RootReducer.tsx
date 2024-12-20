@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import  burgerConstructorSlice  from './slices/BurgerConstructorSlice';
-import  feedInfoSlice  from './slices/FeedInfoSlice';
+import burgerConstructorSlice from './slices/BurgerConstructorSlice';
+import feedInfoSlice from './slices/FeedInfoSlice';
 import orderSlice from './slices/OrderSlice';
 import ingredientsSlice from './slices/IngredientsSlice';
 

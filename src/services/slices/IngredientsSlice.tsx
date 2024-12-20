@@ -4,6 +4,7 @@ import { TIngredient } from '@utils-types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 export interface IIngredientsState {
+  ingredients: any;
   data: TIngredient[];
   loading: boolean;
   error: boolean;
@@ -12,7 +13,8 @@ export interface IIngredientsState {
 const initialState: IIngredientsState = {
   data: [],
   loading: false,
-  error: false
+  error: false,
+  ingredients: undefined
 };
 
 const ingredientsSlice = createSlice({

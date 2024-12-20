@@ -17,6 +17,8 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 
 const App = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const background = location.state?.bakground;
   return (
     <div className={styles.app}>
@@ -59,6 +61,19 @@ const App = () => {
             element={
               <Modal title={''} onClose={() => {}}>
                 <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='ingredients/:id'
+            element={
+              <Modal
+                title='Детали ингредиента'
+                onClose={() => {
+                  navigate(background);
+                }}
+              >
+                <IngredientDetails />
               </Modal>
             }
           />
