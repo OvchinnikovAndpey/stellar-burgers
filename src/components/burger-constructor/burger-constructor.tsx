@@ -1,21 +1,25 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
-import { BurgerConstructorUI } from '@ui';
+import { BurgerConstructorUI, ModalUI, IngredientDetailsUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { closeOrder } from '../../services/slices/OrderSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>(); // Извлечение id из URL
 
   // Извлечение состояния с проверкой на undefined
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor
   ) || { bun: null, ingredients: [] };
 
-  const { isOrderLoading, currentOrder } = useSelector(
-    (state: RootState) => state.order
+  const { isOrderLoading } = useSelector((state: RootState) => state.order);
+
+  // Извлечение данных ингредиента из состояния Redux
+  const ingredientData = useSelector((state: RootState) =>
+    state.ingredients.data.find((ingredient) => ingredient._id === id)
   );
 
   const orderModalData = null;
@@ -40,13 +44,20 @@ export const BurgerConstructor: FC = () => {
   };
 
   return (
-    <BurgerConstructorUI
-      price={price}
-      orderRequest={isOrderLoading}
-      constructorItems={constructorItems}
-      orderModalData={orderModalData}
-      onOrderClick={onOrderClick}
-      closeOrderModal={closeOrderModal}
-    />
+    <div>
+      <BurgerConstructorUI
+        price={price}
+        orderRequest={isOrderLoading}
+        constructorItems={constructorItems}
+        orderModalData={orderModalData}
+        onOrderClick={onOrderClick}
+        closeOrderModal={closeOrderModal}
+      />
+      {id && ingredientData && (
+        <ModalUI title='Детали ингредиента' onClose={() => navigate('/')}>
+          <IngredientDetailsUI ingredientData={ingredientData} />
+        </ModalUI>
+      )}
+    </div>
   );
 };

@@ -15,8 +15,6 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
     (state) => state.ingredients.ingredients
   );
 
-
-  
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
 

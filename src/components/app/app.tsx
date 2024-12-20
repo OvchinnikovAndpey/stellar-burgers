@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import {
   ConstructorPage,
   Feed,
@@ -13,19 +13,19 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
+import { AppHeader, OrderInfo } from '@components';
 
 const App = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
-  const background = location.state?.bakground;
+  const background = location.state?.background;
+
   return (
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route path='/ingredients/:id' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
         {/* Здесь будут защищенные роуты */}
@@ -38,47 +38,6 @@ const App = () => {
         {/* Здесь будут защищенные роуты */}
         <Route path='*' element={<NotFound404 />} />
       </Routes>
-      {background && (
-        <Routes>
-          <Route
-            path='/feed/:number'
-            element={
-              <Modal title={''} onClose={() => {}}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='/ingredients/:id'
-            element={
-              <Modal title={''} onClose={() => {}}>
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-          <Route
-            path='/profile/orders/:number'
-            element={
-              <Modal title={''} onClose={() => {}}>
-                <OrderInfo />
-              </Modal>
-            }
-          />
-          <Route
-            path='ingredients/:id'
-            element={
-              <Modal
-                title='Детали ингредиента'
-                onClose={() => {
-                  navigate(background);
-                }}
-              >
-                <IngredientDetails />
-              </Modal>
-            }
-          />
-        </Routes>
-      )}
     </div>
   );
 };
