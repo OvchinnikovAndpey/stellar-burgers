@@ -22,6 +22,8 @@ export const BurgerConstructor: FC = () => {
     state.ingredients.data.find((ingredient) => ingredient._id === id)
   );
 
+  
+
   const orderModalData = null;
 
   const onOrderClick = () => {
