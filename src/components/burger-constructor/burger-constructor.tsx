@@ -1,24 +1,29 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { RootState, useDispatch, useSelector } from '../../services/store';
+import { useNavigate } from 'react-router-dom';
+import { closeOrder } from '../../services/slices/OrderSlice';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
-  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const orderRequest = false;
+  // Извлечение состояния с проверкой на undefined
+  const constructorItems = useSelector(
+    (state: RootState) => state.burgerConstructor
+  ) || { bun: null, ingredients: [] };
+
+  const { isOrderLoading, currentOrder } = useSelector(
+    (state: RootState) => state.order
+  );
 
   const orderModalData = null;
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (!constructorItems.bun || isOrderLoading) return;
+    // Дополнительная логика для обработки заказа
   };
-  const closeOrderModal = () => {};
 
   const price = useMemo(
     () =>
@@ -30,10 +35,14 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
+  const closeOrderModal = () => {
+    dispatch(closeOrder());
+  };
+
   return (
     <BurgerConstructorUI
       price={price}
-      orderRequest={orderRequest}
+      orderRequest={isOrderLoading}
       constructorItems={constructorItems}
       orderModalData={orderModalData}
       onOrderClick={onOrderClick}

@@ -28,18 +28,20 @@ export const burgerConstructorSlice = createSlice({
       const index = state.ingredients.findIndex(
         (item) => item.id === action.payload
       );
-      if (index !== -1) {
-        state.ingredients.splice(index, 1);
-        state.ingredients.splice(index - 1, 0, state.ingredients[index]);
+      if (index > 0) {
+        // Ensure the ingredient is not already at the top
+        const [ingredient] = state.ingredients.splice(index, 1);
+        state.ingredients.splice(index - 1, 0, ingredient);
       }
     },
     moveIngredientDown: (state, action: PayloadAction<string>) => {
       const index = state.ingredients.findIndex(
         (item) => item.id === action.payload
       );
-      if (index !== -1) {
-        state.ingredients.splice(index, 1);
-        state.ingredients.splice(index + 1, 0, state.ingredients[index]);
+      if (index !== -1 && index < state.ingredients.length - 1) {
+        // Ensure the ingredient is not already at the bottom
+        const [ingredient] = state.ingredients.splice(index, 1);
+        state.ingredients.splice(index + 1, 0, ingredient);
       }
     },
     clearConstructor: (state) => {

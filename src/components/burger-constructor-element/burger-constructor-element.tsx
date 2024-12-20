@@ -11,6 +11,9 @@ import {
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
   ({ ingredient, index, totalItems }) => {
+    console.log('Ingredient:', ingredient);
+    console.log('Index:', index);
+    console.log('Total Items:', totalItems);
     const dispatch = useDispatch();
     const handleMoveDown = () => {
       if (index < totalItems - 1) {
