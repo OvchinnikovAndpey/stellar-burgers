@@ -6,7 +6,8 @@ import { useDispatch } from '../../services/store';
 import {
   moveIngredientDown,
   moveIngredientUp,
-  clearConstructor
+  clearConstructor,
+  removeIngredient
 } from '../../services/slices/BurgerConstructorSlice';
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
@@ -27,8 +28,8 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
       }
     };
 
-    const handleClose = () => {
-      dispatch(clearConstructor());
+    const handleRemove = () => {
+      dispatch(removeIngredient(ingredient.id));
     };
 
     return (
@@ -38,7 +39,7 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
         totalItems={totalItems}
         handleMoveUp={handleMoveUp}
         handleMoveDown={handleMoveDown}
-        handleClose={handleClose}
+        handleClose={handleRemove} // Изменено на handleRemove
       />
     );
   }
