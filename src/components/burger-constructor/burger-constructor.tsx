@@ -9,6 +9,7 @@ export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>(); // Извлечение id из URL
+  console.log(id);
 
   // Извлечение состояния с проверкой на undefined
   const constructorItems = useSelector(
@@ -21,8 +22,6 @@ export const BurgerConstructor: FC = () => {
   const ingredientData = useSelector((state: RootState) =>
     state.ingredients.data.find((ingredient) => ingredient._id === id)
   );
-
-  
 
   const orderModalData = null;
 

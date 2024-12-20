@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
-// Определение интерфейса состояния
 export interface IIngredientsState {
   [x: string]: any;
   data: TIngredient[];
@@ -11,14 +10,12 @@ export interface IIngredientsState {
   error: boolean;
 }
 
-// Инициализация состояния
 const initialState: IIngredientsState = {
   data: [],
   loading: false,
   error: false
 };
 
-// Создание слайса
 const ingredientsSlice = createSlice({
   name: 'ingredient',
   initialState,
@@ -44,7 +41,6 @@ const ingredientsSlice = createSlice({
   }
 });
 
-// Асинхронное действие для получения ингредиентов
 export const getIngredients = createAsyncThunk<TIngredient[]>(
   'ingredient',
   async () => getIngredientsApi()
