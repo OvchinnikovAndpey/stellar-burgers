@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import {
   ConstructorPage,
   Feed,
@@ -13,11 +13,11 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, OrderInfo } from '@components';
+import { AppHeader, OrderInfo, OrderStatus, Modal, IngredientDetails } from '@components';
 
 const App = () => {
   const location = useLocation();
-
+  const navigate = useNavigate();
   const background = location.state?.background;
 
   return (
@@ -38,6 +38,34 @@ const App = () => {
         {/* {{В будущем закину протектед роут}} */}
         <Route path='*' element={<NotFound404 />} />
       </Routes>
+      {background && (
+        <Routes>
+          {/* <Route
+            path='/feed/:number'
+            element={
+              <Modal title={''} onClose={() => navigate(-1)}>
+                <OrderInfo />
+              </Modal>
+            }
+          /> */}
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={''} onClose={() => navigate(-1)}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+          {/* <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title={''} onClose={() => {}}>
+                <OrderInfo />
+              </Modal>
+            }
+          /> */}
+        </Routes>
+      )}
     </div>
   );
 };

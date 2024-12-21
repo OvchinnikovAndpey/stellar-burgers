@@ -1,15 +1,13 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
-import { BurgerConstructorUI, ModalUI, IngredientDetailsUI } from '@ui';
+import { BurgerConstructorUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { closeOrder } from '../../services/slices/OrderSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams<{ id: string }>(); // Извлечение id из URL
-  console.log(id);
 
   // Извлечение состояния с проверкой на undefined
   const constructorItems = useSelector(
@@ -17,11 +15,6 @@ export const BurgerConstructor: FC = () => {
   ) || { bun: null, ingredients: [] };
 
   const { isOrderLoading } = useSelector((state: RootState) => state.order);
-
-  // Извлечение данных ингредиента из состояния Redux
-  const ingredientData = useSelector((state: RootState) =>
-    state.ingredients.data.find((ingredient) => ingredient._id === id)
-  );
 
   const orderModalData = null;
 
@@ -54,11 +47,6 @@ export const BurgerConstructor: FC = () => {
         onOrderClick={onOrderClick}
         closeOrderModal={closeOrderModal}
       />
-      {id && ingredientData && (
-        <ModalUI title='Детали ингредиента' onClose={() => navigate('/')}>
-          <IngredientDetailsUI ingredientData={ingredientData} />
-        </ModalUI>
-      )}
     </div>
   );
 };
