@@ -13,7 +13,13 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, OrderInfo, OrderStatus, Modal, IngredientDetails } from '@components';
+import {
+  AppHeader,
+  OrderInfo,
+  OrderStatus,
+  Modal,
+  IngredientDetails
+} from '@components';
 
 const App = () => {
   const location = useLocation();
