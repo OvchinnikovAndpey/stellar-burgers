@@ -2,5 +2,5 @@
 
 // export type TProtectedRouteProps = {
 //   isAuthOnly?: boolean;
-//   children: ReactElement;
+//   children?: ReactElement;
 // };

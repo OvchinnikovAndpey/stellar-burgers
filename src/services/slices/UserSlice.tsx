@@ -67,7 +67,7 @@ const userSlice = createSlice({
     clearUserError: (state) => {
       state.error = null;
     }
-  }, 
+  },
   selectors: {
     getUserStateSelector: (state) => state,
     getUserSelector: (state) => state.user,
@@ -187,7 +187,12 @@ const userSlice = createSlice({
 });
 
 export const { clearUserError } = userSlice.actions;
-export const {getUserSelector, getUserStateSelector, isAuthorizedSelector, getUserErrorSelector} = userSlice.selectors;
-export {initialState as userInitialState};
+export const {
+  getUserSelector,
+  getUserStateSelector,
+  isAuthorizedSelector,
+  getUserErrorSelector
+} = userSlice.selectors;
+export { initialState as userInitialState };
 
 export default userSlice.reducer;

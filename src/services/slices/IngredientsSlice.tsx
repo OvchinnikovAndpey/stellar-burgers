@@ -4,7 +4,6 @@ import { TIngredient } from '@utils-types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 export interface IIngredientsState {
-  [x: string]: any;
   data: TIngredient[];
   loading: boolean;
   error: boolean;
@@ -42,10 +41,13 @@ const ingredientsSlice = createSlice({
 });
 
 export const getIngredients = createAsyncThunk<TIngredient[]>(
-  'ingredient',
+  'ingredient/get',
   async () => getIngredientsApi()
 );
 
-export const {} = ingredientsSlice.actions;
+// Добавляем селекторы
+export const selectIngredientsData = (state: { ingredients: IIngredientsState }) => state.ingredients.data;
+export const selectIngredientsLoading = (state: { ingredients: IIngredientsState }) => state.ingredients.loading;
+export const selectIngredientsError = (state: { ingredients: IIngredientsState }) => state.ingredients.error;
 
 export default ingredientsSlice.reducer;

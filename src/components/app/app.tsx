@@ -46,14 +46,14 @@ const App = () => {
       </Routes>
       {background && (
         <Routes>
-          {/* <Route
+          <Route
             path='/feed/:number'
             element={
               <Modal title={''} onClose={() => navigate(-1)}>
                 <OrderInfo />
               </Modal>
             }
-          /> */}
+          />
           <Route
             path='/ingredients/:id'
             element={
@@ -62,14 +62,14 @@ const App = () => {
               </Modal>
             }
           />
-          {/* <Route
+          <Route
             path='/profile/orders/:number'
             element={
               <Modal title={''} onClose={() => {}}>
                 <OrderInfo />
               </Modal>
             }
-          /> */}
+          />
         </Routes>
       )}
     </div>

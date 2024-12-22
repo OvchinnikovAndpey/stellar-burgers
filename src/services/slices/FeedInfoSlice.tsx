@@ -43,10 +43,15 @@ export const feedInfoSlice = createSlice({
   }
 });
 
-export const getFeedsThunk = createAsyncThunk<TFeedsResponse>(
-  'feedInfo/getFeedsApiThunk',
-  getFeedsApi
-);
+// export const getFeedsThunk = createAsyncThunk<TFeedsResponse>(
+//   'feedInfo/getFeedsApiThunk',
+//   getFeedsApi
+// );
+
+export const getFeedsThunk = createAsyncThunk('feedInfo/getfeeds', async () => {
+  const response = await getFeedsApi();
+  return response;
+});
 
 export const { addBun } = feedInfoSlice.actions;
 
