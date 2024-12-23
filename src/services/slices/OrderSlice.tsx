@@ -71,6 +71,10 @@ const orderSlice = createSlice({
       state.currentOrder = null;
     }
   },
+  selectors: {
+    getcurrentOrder: (state) => state.currentOrder,
+    getisOrderLoading: (state) => state.isOrderLoading
+  },
   extraReducers: (builder) => {
     builder
       // Обработка создания заказа
@@ -118,4 +122,5 @@ const orderSlice = createSlice({
 });
 
 export const { closeOrder } = orderSlice.actions;
+export const { getcurrentOrder, getisOrderLoading } = orderSlice.selectors;
 export default orderSlice.reducer;

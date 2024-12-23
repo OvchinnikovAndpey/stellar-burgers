@@ -14,7 +14,6 @@ const getOrders = (orders: TOrder[], status: string): number[] =>
 export const FeedInfo: FC = () => {
   const dispatch = useDispatch();
 
-  // Загружаем данные при монтировании компонента
   useEffect(() => {
     dispatch(getFeedsThunk());
   }, [dispatch]);
@@ -23,7 +22,10 @@ export const FeedInfo: FC = () => {
   const total = useSelector((state) => state.feedInfo.total);
   const totalToday = useSelector((state) => state.feedInfo.totalToday);
   const loading = useSelector((state) => state.feedInfo.loading);
-  // const error = useSelector((state) => state.feedInfo.error);
+
+  useEffect(() => {
+    // console.log('Текущие заказы:', orders);
+  }, [orders]);
 
   if (loading) {
     return <Preloader />;
