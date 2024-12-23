@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { orderBurgerApi, getOrdersApi } from '@api';
 import { TOrder } from '@utils-types';
 import { clearConstructor } from './BurgerConstructorSlice';
+import { stat } from 'fs';
+import { RootState } from '@store';
 
 export interface OrderState {
   currentOrder: TOrder | null;
@@ -120,6 +122,28 @@ const orderSlice = createSlice({
       });
   }
 });
+
+export const ordersSelector = (state: RootState) => state.order;
+export const ordersDataSelector = (state: RootState) =>
+  state.order.orderHistory;
+
+// Для получения данных конкретного заказа
+export const ordersInfoDataSelector =
+  (number: string) => (state: RootState) => {
+    if (state.order.orderHistory && state.order.orderHistory.length > 0) {
+      const data = state.order.orderHistory.find(
+        (item: { number: number }) => item.number === +number
+      );
+      if (data) return data;
+    }
+    if (state.feedInfo.orders && state.feedInfo.orders.length > 0) {
+      const data = state.feedInfo.orders.find(
+        (item: { number: number }) => item.number === +number
+      );
+      if (data) return data;
+    }
+    return null;
+  };
 
 export const { closeOrder } = orderSlice.actions;
 export const { getcurrentOrder, getisOrderLoading } = orderSlice.selectors;
