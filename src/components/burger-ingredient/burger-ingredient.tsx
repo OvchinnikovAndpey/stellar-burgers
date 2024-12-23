@@ -1,15 +1,15 @@
+import { nanoid } from 'nanoid'; // Импорт nanoid
 import { FC, memo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { nanoid } from 'nanoid'; // Импорт nanoid
 
 import { BurgerIngredientUI } from '@ui';
-import { TBurgerIngredientProps } from './type';
-import { useDispatch } from '../../services/store';
-import {
-  addIngredient,
-  addBun
-} from '../../services/slices/BurgerConstructorSlice';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
+import {
+  addBun,
+  addIngredient
+} from '../../services/slices/BurgerConstructorSlice';
+import { useDispatch } from '../../services/store';
+import { TBurgerIngredientProps } from './type';
 
 export const BurgerIngredient: FC<TBurgerIngredientProps> =
   memo<TBurgerIngredientProps>(({ ingredient, count }) => {
@@ -18,12 +18,10 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> =
 
     const transformToConstructorIngredient = (
       ingredient: TIngredient
-    ): TConstructorIngredient => {
-      return {
-        ...ingredient,
-        id: nanoid() // Используем nanoid для генерации уникального ID
-      };
-    };
+    ): TConstructorIngredient => ({
+      ...ingredient,
+      id: nanoid() // Используем nanoid для генерации уникального ID
+    });
 
     const handleAdd = () => {
       if (ingredient.type === 'bun') {

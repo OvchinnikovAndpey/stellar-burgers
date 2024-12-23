@@ -1,9 +1,8 @@
-import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from '../../services/store';
 import { TOrder } from '@utils-types';
-import { FeedInfoUI } from '../ui/feed-info';
+import { FC, useEffect } from 'react';
 import { getFeedsThunk } from '../../services/slices/FeedInfoSlice';
-import { Preloader } from '@ui';
+import { useDispatch, useSelector } from '../../services/store';
+import { FeedInfoUI } from '../ui/feed-info';
 
 const getOrders = (orders: TOrder[], status: string): number[] =>
   orders
@@ -22,14 +21,6 @@ export const FeedInfo: FC = () => {
   const total = useSelector((state) => state.feedInfo.total);
   const totalToday = useSelector((state) => state.feedInfo.totalToday);
   const loading = useSelector((state) => state.feedInfo.loading);
-
-  useEffect(() => {
-    // console.log('Текущие заказы:', orders);
-  }, [orders]);
-
-  if (loading) {
-    return <Preloader />;
-  }
 
   const readyOrders = getOrders(orders, 'done');
   const pendingOrders = getOrders(orders, 'pending');
