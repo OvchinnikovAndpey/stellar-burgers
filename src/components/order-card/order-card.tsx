@@ -1,17 +1,27 @@
-import { FC, memo, useMemo } from 'react';
+import { FC, memo, useMemo, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-
+import { useDispatch, useSelector } from '../../services/store';
 import { OrderCardProps } from './type';
 import { TIngredient } from '@utils-types';
 import { OrderCardUI } from '../ui/order-card';
+import { getIngredients, selectIngredientsData, selectIngredientsLoading, selectIngredientsError } from '../../services/slices/IngredientsSlice';
+import { getFeedsThunk } from '../../services/slices/FeedInfoSlice';
+import { Preloader } from '@ui';
 
 const maxIngredients = 6;
 
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
+  const dispatch = useDispatch();
   const location = useLocation();
 
-  /** TODO: взять переменную из стора */
-  const ingredients: TIngredient[] = [];
+  const ingredients: TIngredient[] = useSelector(selectIngredientsData);
+  const ingredientsLoading = useSelector(selectIngredientsLoading);
+  const ingredientsError = useSelector(selectIngredientsError);
+
+  useEffect(() => {
+    dispatch(getIngredients());
+    dispatch(getFeedsThunk());
+  }, [dispatch]);
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
@@ -45,6 +55,8 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
     };
   }, [order, ingredients]);
 
+  if (ingredientsLoading) return <Preloader />;
+  if (ingredientsError) return <div>Ошибка загрузки ингредиентов</div>;
   if (!orderInfo) return null;
 
   return (

@@ -21,6 +21,11 @@ export const initialState: IFeedInfoState = {
 export const feedInfoSlice = createSlice({
   name: 'feedInfo',
   initialState,
+  selectors: {
+    getOrdersFeeds: (state) => state.orders,
+    getTotalFeeds: (state) => state.total,
+    getTotalTodayFeeds: (state) => state.totalToday
+  },
   reducers: {
     addBun: (state, action) => {
       state.orders = action.payload;
@@ -43,11 +48,19 @@ export const feedInfoSlice = createSlice({
   }
 });
 
-export const getFeedsThunk = createAsyncThunk<TFeedsResponse>(
-  'feedInfo/getFeedsApiThunk',
-  getFeedsApi
-);
+// export const getFeedsThunk = createAsyncThunk<TFeedsResponse>(
+//   'feedInfo/getFeedsApiThunk',
+//   getFeedsApi
+// );
+
+export const getFeedsThunk = createAsyncThunk('feedInfo/getfeeds', async () => {
+  const response = await getFeedsApi();
+  return response;
+});
 
 export const { addBun } = feedInfoSlice.actions;
 
 export default feedInfoSlice.reducer;
+
+export const { getOrdersFeeds, getTotalFeeds, getTotalTodayFeeds } =
+  feedInfoSlice.selectors;

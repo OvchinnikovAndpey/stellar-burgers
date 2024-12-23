@@ -12,7 +12,6 @@ export const IngredientDetails: FC = () => {
     (state: { ingredients: { data: TIngredient[] } }) =>
       state.ingredients.data?.find((item: TIngredient) => item._id === id)
   );
-  // Почему не открывается модальное окно
 
   if (!ingredientData) {
     return <Preloader />;

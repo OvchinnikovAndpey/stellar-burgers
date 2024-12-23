@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import {
   ConstructorPage,
   Feed,
@@ -13,27 +13,35 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
+import {
+  AppHeader,
+  OrderInfo,
+  OrderStatus,
+  Modal,
+  IngredientDetails
+} from '@components';
 
 const App = () => {
   const location = useLocation();
-  const background = location.state?.bakground;
+  const navigate = useNavigate();
+  const background = location.state?.background;
+
   return (
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path='/' element={<ConstructorPage />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route path='/ingredients/:id' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
-        {/* Здесь будут защищенные роуты */}
+        {/* {В будущем закину протектед роут} */}
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password' element={<ResetPassword />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/profile/orders' element={<ProfileOrders />} />
-        {/* Здесь будут защищенные роуты */}
+        {/* {{В будущем закину протектед роут}} */}
         <Route path='*' element={<NotFound404 />} />
       </Routes>
       {background && (
@@ -41,7 +49,7 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title={''} onClose={() => {}}>
+              <Modal title={''} onClose={() => navigate(-1)}>
                 <OrderInfo />
               </Modal>
             }
@@ -49,7 +57,7 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title={''} onClose={() => {}}>
+              <Modal title={''} onClose={() => navigate(-1)}>
                 <IngredientDetails />
               </Modal>
             }

@@ -15,6 +15,8 @@ export const OrderInfo: FC = () => {
     number: 0
   };
 
+  //TODO: взять переменные orderData и ingredients из стора
+
   const ingredients: TIngredient[] = [];
 
   /* Готовим данные для отображения */

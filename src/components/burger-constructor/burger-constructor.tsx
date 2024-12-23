@@ -14,9 +14,7 @@ export const BurgerConstructor: FC = () => {
     (state: RootState) => state.burgerConstructor
   ) || { bun: null, ingredients: [] };
 
-  const { isOrderLoading, currentOrder } = useSelector(
-    (state: RootState) => state.order
-  );
+  const { isOrderLoading } = useSelector((state: RootState) => state.order);
 
   const orderModalData = null;
 
@@ -40,13 +38,15 @@ export const BurgerConstructor: FC = () => {
   };
 
   return (
-    <BurgerConstructorUI
-      price={price}
-      orderRequest={isOrderLoading}
-      constructorItems={constructorItems}
-      orderModalData={orderModalData}
-      onOrderClick={onOrderClick}
-      closeOrderModal={closeOrderModal}
-    />
+    <div>
+      <BurgerConstructorUI
+        price={price}
+        orderRequest={isOrderLoading}
+        constructorItems={constructorItems}
+        orderModalData={orderModalData}
+        onOrderClick={onOrderClick}
+        closeOrderModal={closeOrderModal}
+      />
+    </div>
   );
 };

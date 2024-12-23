@@ -21,7 +21,7 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> =
     ): TConstructorIngredient => {
       return {
         ...ingredient,
-        id: nanoid() // Используйте nanoid для генерации уникального ID
+        id: nanoid() // Используем nanoid для генерации уникального ID
       };
     };
 
@@ -34,11 +34,13 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> =
     };
 
     return (
-      <BurgerIngredientUI
-        ingredient={ingredient}
-        count={count}
-        locationState={{ background: location }}
-        handleAdd={handleAdd}
-      />
+      <>
+        <BurgerIngredientUI
+          ingredient={ingredient}
+          count={count}
+          locationState={{ background: location }}
+          handleAdd={handleAdd}
+        />
+      </>
     );
   });
