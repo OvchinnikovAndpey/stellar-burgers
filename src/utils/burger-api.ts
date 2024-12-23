@@ -132,8 +132,8 @@ export const getOrderByNumberApi = (number: number) =>
   }).then((res) => checkResponse<TOrderResponse>(res));
 
 export type TRegisterData = {
-  email: string;
   name: string;
+  email: string;
   password: string;
 };
 
