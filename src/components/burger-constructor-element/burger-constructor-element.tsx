@@ -39,7 +39,7 @@ export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
         totalItems={totalItems}
         handleMoveUp={handleMoveUp}
         handleMoveDown={handleMoveDown}
-        handleClose={handleRemove} // Изменено на handleRemove
+        handleClose={handleRemove}
       />
     );
   }

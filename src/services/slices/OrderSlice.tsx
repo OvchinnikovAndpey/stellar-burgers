@@ -55,7 +55,7 @@ export const getOrderDetailsByNumber = createAsyncThunk<TOrder, number>(
   'order/getOrderDetailsByNumber',
   async (number, { rejectWithValue }) => {
     try {
-      const orders = await getOrdersApi(); // Предполагается, что это возвращает TOrder[]
+      const orders = await getOrdersApi();
       const order = orders.find((order) => order.number === number);
       if (!order) throw new Error('Заказ не найден');
       return order;
