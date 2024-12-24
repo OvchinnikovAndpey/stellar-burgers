@@ -29,7 +29,6 @@ export const burgerConstructorSlice = createSlice({
         (item) => item.id === action.payload
       );
       if (index > 0) {
-        // Ensure the ingredient is not already at the top
         const [ingredient] = state.ingredients.splice(index, 1);
         state.ingredients.splice(index - 1, 0, ingredient);
       }
@@ -39,7 +38,6 @@ export const burgerConstructorSlice = createSlice({
         (item) => item.id === action.payload
       );
       if (index !== -1 && index < state.ingredients.length - 1) {
-        // Ensure the ingredient is not already at the bottom
         const [ingredient] = state.ingredients.splice(index, 1);
         state.ingredients.splice(index + 1, 0, ingredient);
       }

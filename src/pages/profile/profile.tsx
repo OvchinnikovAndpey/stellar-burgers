@@ -2,6 +2,7 @@ import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
 import { updateUser } from '../../services/slices/UserSlice';
 import { ProfileUI } from '@ui-pages';
+import { TRegisterData } from '@api';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();

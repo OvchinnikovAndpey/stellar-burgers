@@ -1,21 +1,21 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import type { TLoginData, TRegisterData } from '@api';
 import {
-  registerUserApi,
-  loginUserApi,
-  getUserApi,
-  updateUserApi,
-  logoutApi,
   forgotPasswordApi,
+  getUserApi,
+  loginUserApi,
+  logoutApi,
+  registerUserApi,
   resetPasswordApi,
-  refreshToken
+  updateUserApi
 } from '@api';
-import type { TRegisterData, TLoginData } from '@api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { deleteCookie, setCookie } from '../../utils/cookie';
 
 // Определение интерфейса состояния пользователя
 export interface IUserState {
   user: TUser | null;
+  isAuthChecked: boolean;
   isAuthorized: boolean;
   isLoading: boolean;
   error: string | null;
@@ -24,6 +24,7 @@ export interface IUserState {
 // Начальное состояние
 const initialState: IUserState = {
   user: null,
+  isAuthChecked: false,
   isAuthorized: false,
   isLoading: false,
   error: null
@@ -66,6 +67,9 @@ const userSlice = createSlice({
   reducers: {
     clearUserError: (state) => {
       state.error = null;
+    },
+    checkUserStatus: (state) => {
+      state.isAuthChecked = true;
     }
   },
   selectors: {
@@ -87,7 +91,7 @@ const userSlice = createSlice({
         state.user = payload.user;
         state.isAuthorized = true;
         setCookie('accessToken', payload.accessToken);
-        localStorage.setItem('refreshToken', payload.refreshToken);
+        localStorage.setItem('  ', payload.refreshToken);
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
@@ -186,7 +190,7 @@ const userSlice = createSlice({
   }
 });
 
-export const { clearUserError } = userSlice.actions;
+export const { clearUserError, checkUserStatus } = userSlice.actions;
 export const {
   getUserSelector,
   getUserStateSelector,

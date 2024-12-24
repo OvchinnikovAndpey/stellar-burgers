@@ -1,12 +1,15 @@
-import { FC, memo, useMemo, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/store';
-import { OrderCardProps } from './type';
-import { TIngredient } from '@utils-types';
-import { OrderCardUI } from '../ui/order-card';
-import { getIngredients, selectIngredientsData, selectIngredientsLoading, selectIngredientsError } from '../../services/slices/IngredientsSlice';
-import { getFeedsThunk } from '../../services/slices/FeedInfoSlice';
 import { Preloader } from '@ui';
+import { TIngredient } from '@utils-types';
+import { FC, memo, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
+import {
+  selectIngredientsData,
+  selectIngredientsError,
+  selectIngredientsLoading
+} from '../../services/slices/IngredientsSlice';
+import { useDispatch, useSelector } from '../../services/store';
+import { OrderCardUI } from '../ui/order-card';
+import { OrderCardProps } from './type';
 
 const maxIngredients = 6;
 
@@ -17,11 +20,6 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const ingredients: TIngredient[] = useSelector(selectIngredientsData);
   const ingredientsLoading = useSelector(selectIngredientsLoading);
   const ingredientsError = useSelector(selectIngredientsError);
-
-  useEffect(() => {
-    dispatch(getIngredients());
-    dispatch(getFeedsThunk());
-  }, [dispatch]);
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
