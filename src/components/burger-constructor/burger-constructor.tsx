@@ -1,7 +1,7 @@
 import { BurgerConstructorUI } from '@ui';
 import { TConstructorIngredient } from '@utils-types';
 import { FC, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   closeOrder,
   getcurrentOrder,
@@ -12,7 +12,6 @@ import { RootState, useDispatch, useSelector } from '../../services/store';
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
   const user = useSelector((state) => state.user.user);
   const constructorItems = useSelector(
     (state: RootState) => state.burgerConstructor
@@ -46,9 +45,6 @@ export const BurgerConstructor: FC = () => {
       .unwrap()
       .then((order) => {
         console.log('Заказ успешно отправлен:', order);
-        // navigate(`/profile/orders/id/${order.number}`, {
-        //   state: { background: location }
-        // });
       })
       .catch((error) => {
         console.error('Ошибка при отправке заказа:', error);
