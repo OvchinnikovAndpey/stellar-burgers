@@ -101,7 +101,7 @@ describe('Конструктор', () => {
       // Нажимаем кнопку "Оформить заказ"
       cy.get(buttonSelector).contains('Оформить заказ').click();
 
-      // Ждем успешного ответа от сервера
+      // Ожидание успешного ответа от сервера
       cy.wait('@createOrder')
         .its('response.statusCode')
         .should('eq', 200);
