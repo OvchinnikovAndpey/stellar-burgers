@@ -106,7 +106,7 @@ describe('Конструктор', () => {
         .its('response.statusCode')
         .should('eq', 200);
 
-      // Проверяем, что модальное окно с номером заказа открыто
+      // Проверяем что модальное окно с номером заказа открыто
       cy.get(modalsSelector).contains('12345').should('be.visible');
       // Закрываем модальное окно
       cy.get(modalsSelector).find('button').click().should('not.exist');
