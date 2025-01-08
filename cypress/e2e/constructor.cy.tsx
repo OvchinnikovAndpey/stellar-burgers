@@ -93,7 +93,7 @@ describe('Конструктор', () => {
     it('успешно создать заказ и очистить конструктор', () => {
       // Ждем загрузки ингредиентов
       cy.wait('@getIngredients');
-      // Добавляем ингредиенты в конструктор
+      // Добавляем ингредиенты
       cy.get(categoryBunSelector).should('exist').contains('Добавить').click();
       cy.get(categoryMainSelector).contains('Добавить').click();
       cy.get(categoryMainSelector).contains('Добавить').click();
