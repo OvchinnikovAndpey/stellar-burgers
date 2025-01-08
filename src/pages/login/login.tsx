@@ -1,8 +1,8 @@
-import { FC, SyntheticEvent, useState } from 'react';
 import { LoginUI } from '@ui-pages';
-import { useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/store';
+import { FC, SyntheticEvent, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { loginUser } from '../../services/slices/UserSlice';
+import { useDispatch, useSelector } from '../../services/store';
 
 export const Login: FC = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +11,6 @@ export const Login: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const error = useSelector((state) => state.user.error);
 
   const handleSubmit = (e: SyntheticEvent) => {
@@ -23,10 +22,6 @@ export const Login: FC = () => {
       })
       .catch((err) => console.log(err));
   };
-
-  if (isAuthorized) {
-    return <Navigate to='/' replace />;
-  }
 
   return (
     <LoginUI
