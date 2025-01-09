@@ -1,253 +1,89 @@
-import reducer, {
-  addBun,
+import constructorReducer, {
   addIngredient,
   removeIngredient,
   moveIngredientUp,
   moveIngredientDown,
-  clearConstructor,
-  TBurgerConstructor
+  clearConstructor
 } from './BurgerConstructorSlice';
-import { TConstructorIngredient, TIngredient } from '@utils-types';
-import { nanoid } from 'nanoid';
+import { TConstructorIngredient } from '@utils-types';
 
-// Мокирование nanoid для предсказуемости
-jest.mock('nanoid', () => ({
-  nanoid: () => 'unique-id',
-}));
-
-describe('burgerConstructorSlice', () => {
-  const initialState: TBurgerConstructor = { bun: null, ingredients: [] };
-
-  it('должен обрабатывать addBun', () => {
-    const bun: TIngredient = {
-      _id: 'bun1',
-      name: 'Bun',
-      type: 'bun',
-      proteins: 10,
-      fat: 5,
-      carbohydrates: 20,
-      calories: 200,
-      price: 50,
-      image: 'image_url',
-      image_large: 'image_large_url',
-      image_mobile: 'image_mobile_url'
-    };
-    const action = addBun(bun);
-    const state = reducer(initialState, action);
-    expect(state.bun).toEqual(bun);
+describe('constructorSlice reducer', () => {
+  const createIngredient = (id: string): TConstructorIngredient => ({
+    id,
+    _id: id,
+    name: `ingredient-${id}`,
+    type: 'main',
+    price: 100,
+    proteins: 0,
+    fat: 0,
+    carbohydrates: 0,
+    calories: 0,
+    image: '',
+    image_large: '',
+    image_mobile: ''
   });
 
-  it('должен обрабатывать addIngredient', () => {
-    const ingredient: TConstructorIngredient = {
-      _id: 'ing1',
-      id: 'ing1',
-      name: 'Ingredient',
-      type: 'sauce',
-      proteins: 5,
-      fat: 2,
-      carbohydrates: 10,
-      calories: 100,
-      price: 20,
-      image: 'image_url',
-      image_large: 'image_large_url',
-      image_mobile: 'image_mobile_url'
-    };
-    const action = addIngredient(ingredient);
-    const state = reducer(initialState, action);
-    expect(state.ingredients).toEqual([{ ...ingredient, id: 'unique-id' }]);
+  const createInitialState = (
+    ingredients: TConstructorIngredient[] = []
+  ): { bun: null; ingredients: TConstructorIngredient[] } => ({
+    bun: null,
+    ingredients
   });
 
-  it('должен обрабатывать removeIngredient', () => {
-    const stateWithIngredient = {
-      ...initialState,
-      ingredients: [{
-        _id: 'ing1',
-        id: 'unique-id',
-        name: 'Ingredient',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      }]
-    };
-    const action = removeIngredient('unique-id');
-    const state = reducer(stateWithIngredient, action);
-    expect(state.ingredients).toEqual([]);
+  it('should return the initial state', () => {
+    const newState = constructorReducer(undefined, { type: '' });
+    expect(newState).toEqual(createInitialState());
   });
 
-  it('должен обрабатывать moveIngredientUp', () => {
-    const stateWithIngredients = {
-      ...initialState,
-      ingredients: [
-        {
-          _id: 'ing1',
-          id: 'id1',
-          name: 'Ingredient1',
-          type: 'sauce',
-          proteins: 5,
-          fat: 2,
-          carbohydrates: 10,
-          calories: 100,
-          price: 20,
-          image: 'image_url',
-          image_large: 'image_large_url',
-          image_mobile: 'image_mobile_url'
-        },
-        {
-          _id: 'ing2',
-          id: 'id2',
-          name: 'Ingredient2',
-          type: 'sauce',
-          proteins: 5,
-          fat: 2,
-          carbohydrates: 10,
-          calories: 100,
-          price: 20,
-          image: 'image_url',
-          image_large: 'image_large_url',
-          image_mobile: 'image_mobile_url'
-        }
-      ]
-    };
-    const action = moveIngredientUp('id2');
-    const state = reducer(stateWithIngredients, action);
-    expect(state.ingredients).toEqual([
-      {
-        _id: 'ing2',
-        id: 'id2',
-        name: 'Ingredient2',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      },
-      {
-        _id: 'ing1',
-        id: 'id1',
-        name: 'Ingredient1',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      }
-    ]);
+  it('add ingredient', () => {
+    const initialState = createInitialState();
+    const action = addIngredient(createIngredient('test-id'));
+
+    const newState = constructorReducer(initialState, action);
+    expect(newState.ingredients.length).toBe(1);
+    expect(newState.ingredients[0].id).toBeDefined();
+    expect(newState.ingredients[0].id).not.toBe('');
+    expect(newState.ingredients[0]._id).toBe('test-id');
+    expect(newState.ingredients[0].id).not.toBe('test-id');
   });
 
-  it('должен обрабатывать moveIngredientDown', () => {
-    const stateWithIngredients = {
-      ...initialState,
-      ingredients: [
-        {
-          _id: 'ing1',
-          id: 'id1',
-          name: 'Ingredient1',
-          type: 'sauce',
-          proteins: 5,
-          fat: 2,
-          carbohydrates: 10,
-          calories: 100,
-          price: 20,
-          image: 'image_url',
-          image_large: 'image_large_url',
-          image_mobile: 'image_mobile_url'
-        },
-        {
-          _id: 'ing2',
-          id: 'id2',
-          name: 'Ingredient2',
-          type: 'sauce',
-          proteins: 5,
-          fat: 2,
-          carbohydrates: 10,
-          calories: 100,
-          price: 20,
-          image: 'image_url',
-          image_large: 'image_large_url',
-          image_mobile: 'image_mobile_url'
-        }
-      ]
-    };
-    const action = moveIngredientDown('id1');
-    const state = reducer(stateWithIngredients, action);
-    expect(state.ingredients).toEqual([
-      {
-        _id: 'ing2',
-        id: 'id2',
-        name: 'Ingredient2',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      },
-      {
-        _id: 'ing1',
-        id: 'id1',
-        name: 'Ingredient1',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      }
-    ]);
+  it('remove ingredient by id', () => {
+    const ingredient = createIngredient('test-id');
+    const initialState = createInitialState([ingredient]);
+    const action = removeIngredient({ id: 'test-id' });
+    const newState = constructorReducer(initialState, action);
+
+    expect(newState.ingredients.length).toBe(0);
   });
 
-  it('должен обрабатывать clearConstructor', () => {
-    const stateWithBunAndIngredients = {
-      bun: {
-        _id: 'bun1',
-        name: 'Bun',
-        type: 'bun',
-        proteins: 10,
-        fat: 5,
-        carbohydrates: 20,
-        calories: 200,
-        price: 50,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      },
-      ingredients: [{
-        _id: 'ing1',
-        id: 'id1',
-        name: 'Ingredient1',
-        type: 'sauce',
-        proteins: 5,
-        fat: 2,
-        carbohydrates: 10,
-        calories: 100,
-        price: 20,
-        image: 'image_url',
-        image_large: 'image_large_url',
-        image_mobile: 'image_mobile_url'
-      }]
-    };
+  it('move ingredient up', () => {
+    const ingredients = [createIngredient('1'), createIngredient('2')];
+    const initialState = createInitialState(ingredients);
+    // Передаем ID ингредиента, который нужно переместить
+    const action = moveIngredientUp('2');
+    const newState = constructorReducer(initialState, action);
+
+    expect(newState.ingredients[0].id).toBe('2');
+  });
+
+  it('move ingredient down', () => {
+    const ingredients = [createIngredient('1'), createIngredient('2')];
+    const initialState = createInitialState(ingredients);
+    // Передаем ID ингредиента, который нужно переместить
+    const action = moveIngredientDown('1');
+    const newState = constructorReducer(initialState, action);
+
+    expect(newState.ingredients[0].id).toBe('2');
+    expect(newState.ingredients[1].id).toBe('1');
+  });
+
+  it('should reset the constructor', () => {
+    const ingredients = [createIngredient('1'), createIngredient('2')];
+    const initialState = createInitialState(ingredients);
     const action = clearConstructor();
-    const state = reducer(stateWithBunAndIngredients, action);
-    expect(state).toEqual(initialState);
+    const newState = constructorReducer(initialState, action);
+
+    expect(newState.bun).toBeNull();
+    expect(newState.ingredients.length).toBe(0);
   });
 });

@@ -16,7 +16,21 @@ describe('Срез информации о лентах', () => {
   });
 
   it('должен обрабатывать getFeeds.fulfilled', () => {
-    const feeds = { orders: [{ _id: 'order1', name: 'Order1', status: '', createdAt: '', updatedAt: '', number: 0, ingredients: [] }], total: 100, totalToday: 10 };
+    const feeds = {
+      orders: [
+        {
+          _id: 'order1',
+          name: 'Order1',
+          status: '',
+          createdAt: '',
+          updatedAt: '',
+          number: 0,
+          ingredients: []
+        }
+      ],
+      total: 100,
+      totalToday: 10
+    };
     const action = { type: getFeedsThunk.fulfilled.type, payload: feeds };
     const state = feedInfoReducer(initialState, action);
     expect(state).toEqual({
@@ -43,7 +57,17 @@ describe('Срез информации о лентах', () => {
   });
 
   it('должен обрабатывать addBun', () => {
-    const newOrders: TOrder[] = [{ _id: 'order2', name: 'Bun', status: '', createdAt: '', updatedAt: '', number: 0, ingredients: [] }];
+    const newOrders: TOrder[] = [
+      {
+        _id: 'order2',
+        name: 'Bun',
+        status: '',
+        createdAt: '',
+        updatedAt: '',
+        number: 0,
+        ingredients: []
+      }
+    ];
     const action = addBun(newOrders);
     const state = feedInfoReducer(initialState, action);
     expect(state.orders).toEqual(newOrders);
@@ -53,7 +77,17 @@ describe('Срез информации о лентах', () => {
     const state = {
       feedInfo: {
         ...initialState,
-        orders: [{ _id: 'order3', name: 'Order3', status: '', createdAt: '', updatedAt: '', number: 0, ingredients: [] }]
+        orders: [
+          {
+            _id: 'order3',
+            name: 'Order3',
+            status: '',
+            createdAt: '',
+            updatedAt: '',
+            number: 0,
+            ingredients: []
+          }
+        ]
       }
     };
     expect(getOrdersFeeds(state)).toEqual(state.feedInfo.orders);
