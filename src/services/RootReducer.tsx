@@ -8,7 +8,7 @@ import userSlice from './slices/UserSlice';
 const rootReducer = combineReducers({
   burgerConstructor: burgerConstructorSlice,
   feedInfo: feedInfoSlice,
-  ingredients: ingredientsSlice, // Убедитесь, что здесь используется 'ingredients'
+  ingredients: ingredientsSlice,
   order: orderSlice,
   user: userSlice
 });

@@ -108,7 +108,7 @@ describe('Конструктор', () => {
 
       // Проверяем что модальное окно с номером заказа открыто
       cy.get(modalsSelector).contains('12345').should('be.visible');
-      // Закрываем модальное окно
+      // Закрываем модалку
       cy.get(modalsSelector).find('button').click().should('not.exist');
 
       // Проверяем, что конструктор очищен после создания заказа
