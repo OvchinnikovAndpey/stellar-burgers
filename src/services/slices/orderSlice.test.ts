@@ -1,7 +1,7 @@
 import orderReducer, { initiateOrder, getUserOrderHistory } from './OrderSlice';
 import { OrderState } from './OrderSlice';
 
-describe('Срез заказов', () => {
+describe('OrderSlice', () => {
   const initialState: OrderState = {
     currentOrder: null,
     orderHistory: null,

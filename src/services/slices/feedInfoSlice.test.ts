@@ -8,7 +8,7 @@ import feedInfoReducer, {
 } from './FeedInfoSlice';
 import { TOrder } from '@utils-types';
 
-describe('Срез информации о лентах', () => {
+describe('FeedInfoSlice', () => {
   it('должен обрабатывать getFeeds.pending', () => {
     const action = { type: getFeedsThunk.pending.type };
     const state = feedInfoReducer(initialState, action);

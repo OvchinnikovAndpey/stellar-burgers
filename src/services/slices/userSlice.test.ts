@@ -8,7 +8,7 @@ import userReducer, {
   getUser
 } from './UserSlice';
 
-describe('User Slice', () => {
+describe('UserSlice', () => {
   const initialState = {
     user: null,
     isAuthChecked: false,
@@ -17,19 +17,19 @@ describe('User Slice', () => {
     error: null
   };
 
-  it('should return the initial state for an unknown action', () => {
+  it('должен вернуть начальное состояние для неизвестного действия', () => {
     const state = userReducer(undefined, { type: '' });
     expect(state).toEqual(initialState);
   });
 
-  it('should handle registerUser.pending', () => {
+  it('должен обработать registerUser.pending', () => {
     const action = { type: registerUser.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle registerUser.fulfilled', () => {
+  it('должен обработать registerUser.fulfilled', () => {
     const user = { id: 'user123', email: 'test@test.com' };
     const action = {
       type: registerUser.fulfilled.type,
@@ -49,28 +49,28 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle registerUser.rejected', () => {
+  it('должен обработать registerUser.rejected', () => {
     const action = {
       type: registerUser.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isAuthorized: false,
       isLoading: false
     });
   });
 
-  it('should handle loginUser.pending', () => {
+  it('должен обработать loginUser.pending', () => {
     const action = { type: loginUser.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle loginUser.fulfilled', () => {
+  it('должен обработать loginUser.fulfilled', () => {
     const user = { id: 'user123', email: 'test@test.com' };
     const action = {
       type: loginUser.fulfilled.type,
@@ -90,28 +90,28 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle loginUser.rejected', () => {
+  it('должен обработать loginUser.rejected', () => {
     const action = {
       type: loginUser.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isAuthorized: false,
       isLoading: false
     });
   });
 
-  it('should handle logoutUser.pending', () => {
+  it('должен обработать logoutUser.pending', () => {
     const action = { type: logoutUser.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle logoutUser.fulfilled', () => {
+  it('должен обработать logoutUser.fulfilled', () => {
     const action = { type: logoutUser.fulfilled.type };
     const state = userReducer(
       {
@@ -130,28 +130,28 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle logoutUser.rejected', () => {
+  it('должен обработать logoutUser.rejected', () => {
     const action = {
       type: logoutUser.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isAuthorized: false,
       isLoading: false
     });
   });
 
-  it('should handle updateUser.pending', () => {
+  it('должен обработать updateUser.pending', () => {
     const action = { type: updateUser.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle updateUser.fulfilled', () => {
+  it('должен обработать updateUser.fulfilled', () => {
     const user = { id: 'user123', email: 'updated@test.com' };
     const action = {
       type: updateUser.fulfilled.type,
@@ -167,28 +167,28 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle updateUser.rejected', () => {
+  it('должен обработать updateUser.rejected', () => {
     const action = {
       type: updateUser.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isAuthorized: false,
       isLoading: false
     });
   });
 
-  it('should handle forgotPasswoerd.pending', () => {
+  it('должен обработать forgotPasswoerd.pending', () => {
     const action = { type: forgotPasswoerd.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle forgotPasswoerd.fulfilled', () => {
+  it('должен обработать forgotPasswoerd.fulfilled', () => {
     const action = { type: forgotPasswoerd.fulfilled.type };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
@@ -198,27 +198,27 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle forgotPasswoerd.rejected', () => {
+  it('должен обработать forgotPasswoerd.rejected', () => {
     const action = {
       type: forgotPasswoerd.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isLoading: false
     });
   });
 
-  it('should handle resetPassword.pending', () => {
+  it('должен обработать resetPassword.pending', () => {
     const action = { type: resetPassword.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle resetPassword.fulfilled', () => {
+  it('должен обработать resetPassword.fulfilled', () => {
     const action = { type: resetPassword.fulfilled.type };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
@@ -228,27 +228,27 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle resetPassword.rejected', () => {
+  it('должен обработать resetPassword.rejected', () => {
     const action = {
       type: resetPassword.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isLoading: false
     });
   });
 
-  it('should handle getUser.pending', () => {
+  it('должен обработать getUser.pending', () => {
     const action = { type: getUser.pending.type };
     const state = userReducer(initialState, action);
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('should handle getUser.fulfilled', () => {
+  it('должен обработать getUser.fulfilled', () => {
     const user = { id: 'user123', email: 'test@test.com' };
     const action = {
       type: getUser.fulfilled.type,
@@ -264,15 +264,15 @@ describe('User Slice', () => {
     });
   });
 
-  it('should handle getUser.rejected', () => {
+  it('должен обработать getUser.rejected', () => {
     const action = {
       type: getUser.rejected.type,
-      error: { message: 'Error' }
+      error: { message: 'Ошибка' }
     };
     const state = userReducer(initialState, action);
     expect(state).toEqual({
       ...initialState,
-      error: 'Error',
+      error: 'Ошибка',
       isAuthorized: false,
       isLoading: false
     });

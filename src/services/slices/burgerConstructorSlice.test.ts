@@ -30,12 +30,12 @@ describe('constructorSlice reducer', () => {
     ingredients
   });
 
-  it('should return the initial state', () => {
+  it('вернуть начальное состояние', () => {
     const newState = constructorReducer(undefined, { type: '' });
     expect(newState).toEqual(createInitialState());
   });
 
-  it('add ingredient', () => {
+  it('добавить ингредиент', () => {
     const initialState = createInitialState();
     const action = addIngredient(createIngredient('test-id'));
 
@@ -47,7 +47,7 @@ describe('constructorSlice reducer', () => {
     expect(newState.ingredients[0].id).not.toBe('test-id');
   });
 
-  it('remove ingredient by id', () => {
+  it('удалить ингредиент по id', () => {
     const ingredient = createIngredient('test-id');
     const initialState = createInitialState([ingredient]);
     const action = removeIngredient({ id: 'test-id' });
@@ -56,20 +56,18 @@ describe('constructorSlice reducer', () => {
     expect(newState.ingredients.length).toBe(0);
   });
 
-  it('move ingredient up', () => {
+  it('переместить ингредиент вверх', () => {
     const ingredients = [createIngredient('1'), createIngredient('2')];
     const initialState = createInitialState(ingredients);
-    // Передаем ID ингредиента, который нужно переместить
     const action = moveIngredientUp('2');
     const newState = constructorReducer(initialState, action);
 
     expect(newState.ingredients[0].id).toBe('2');
   });
 
-  it('move ingredient down', () => {
+  it('переместить ингредиент вниз', () => {
     const ingredients = [createIngredient('1'), createIngredient('2')];
     const initialState = createInitialState(ingredients);
-    // Передаем ID ингредиента, который нужно переместить
     const action = moveIngredientDown('1');
     const newState = constructorReducer(initialState, action);
 
@@ -77,7 +75,7 @@ describe('constructorSlice reducer', () => {
     expect(newState.ingredients[1].id).toBe('1');
   });
 
-  it('should reset the constructor', () => {
+  it('сбросить конструктор', () => {
     const ingredients = [createIngredient('1'), createIngredient('2')];
     const initialState = createInitialState(ingredients);
     const action = clearConstructor();
