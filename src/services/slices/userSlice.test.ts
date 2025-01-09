@@ -1,6 +1,6 @@
 import userReducer, { loginUser } from './UserSlice';
 import { IUserState } from './UserSlice';
-
+// test
 describe('Срез пользователя', () => {
   const initialState: IUserState = {
     user: null,

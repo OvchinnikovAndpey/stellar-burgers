@@ -1,5 +1,5 @@
 TN:
-SF:src\services\RootReducer.tsx
+SF:src/services/RootReducer.tsx
 FNF:0
 FNH:0
 DA:1,1
@@ -24,7 +24,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\services\slices\BurgerConstructorSlice.tsx
+SF:src/services/slices/BurgerConstructorSlice.tsx
 FN:16,addBun
 FN:19,addIngredient
 FN:22,removeIngredient
@@ -115,7 +115,7 @@ BRF:9
 BRH:9
 end_of_record
 TN:
-SF:src\services\slices\FeedInfoSlice.tsx
+SF:src/services/slices/FeedInfoSlice.tsx
 FN:25,getOrdersFeeds
 FN:26,getTotalFeeds
 FN:27,getTotalTodayFeeds
@@ -204,7 +204,7 @@ BRF:9
 BRH:8
 end_of_record
 TN:
-SF:src\services\slices\IngredientsSlice.tsx
+SF:src/services/slices/IngredientsSlice.tsx
 FN:30,extraReducers
 FN:55,selectIngredientsData
 FN:58,selectIngredientsLoading
@@ -293,7 +293,7 @@ BRF:7
 BRH:7
 end_of_record
 TN:
-SF:src\services\slices\OrderSlice.tsx
+SF:src/services/slices/OrderSlice.tsx
 FN:72,closeOrder
 FN:77,getcurrentOrder
 FN:78,getisOrderLoading
@@ -471,7 +471,7 @@ BRF:5
 BRH:5
 end_of_record
 TN:
-SF:src\services\slices\UserSlice.tsx
+SF:src/services/slices/UserSlice.tsx
 FN:68,clearUserError
 FN:71,checkUserStatus
 FN:76,getUserStateSelector
@@ -701,7 +701,7 @@ BRF:5
 BRH:4
 end_of_record
 TN:
-SF:src\utils\burger-api.ts
+SF:src/utils/burger-api.ts
 FN:6,checkResponse
 FN:18,refreshToken
 FN:38,fetchWithRefresh
@@ -975,7 +975,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:src\utils\cookie.ts
+SF:src/utils/cookie.ts
 FN:1,getCookie
 FN:13,setCookie
 FN:45,deleteCookie
