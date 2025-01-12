@@ -1,8 +1,9 @@
 {
   "name": "react-canonical",
   "version": "0.1.0",
-  "private": true,
   "homepage": "https://ovchinnikovandpey.github.io/stellar-burgers/",
+  "private": true,
+ 
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "@testing-library/jest-dom": "^5.16.5",
