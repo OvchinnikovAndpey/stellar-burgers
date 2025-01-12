@@ -6,7 +6,7 @@ import constructorReducer, {
   clearConstructor
 } from './BurgerConstructorSlice';
 import { TConstructorIngredient } from '@utils-types';
-
+// test
 describe('constructorSlice reducer', () => {
   const createIngredient = (id: string): TConstructorIngredient => ({
     id,
