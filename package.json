@@ -96,8 +96,9 @@
     "format": "prettier ./src --write",
     "cypress:open": "cypress open",
     "test": "jest",
-    "deploy": "gh-pages -d dist",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
