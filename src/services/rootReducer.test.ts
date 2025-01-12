@@ -1,5 +1,4 @@
 import rootReducer from './RootReducer';
-
 describe('rootReducer', () => {
   it('должен инициализировать rootReducer с начальным состоянием', () => {
     const state = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });
